@@ -1,5 +1,5 @@
-outputDir: "output/envis_power_uc_stoch/"
-inputDir: "Data/envis13_stoch/"
+outputDir: "output/envis13_2030/DetUC/"
+inputDir: "Data/envis13_2030/"
 timeseriespath: Data/TimeSeries
 
 # dates information:
