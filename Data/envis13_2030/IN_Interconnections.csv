@@ -1,0 +1,35 @@
+Name,StartLine,EndLine,MaxPowerFlow,MinPowerFlow,MaxAddedCapacity,MaxRetCapacity,InvestmentCost
+Denmark>Germany,Denmark,Germany,4700.00000037017,-4700.00000006608,100,0,0
+Denmark>Norway,Denmark,Norway,1885.60640368089,-1912.89600315942,100,0,0
+Denmark>Sweden,Denmark,Sweden,2449.99999893219,-2449.99999894945,100,0,0
+Denmark>United Kingdom,Denmark,United Kingdom,1400.00000173399,-1400.00000173407,100,0,0
+Finland>Sweden,Finland,Sweden,3314.77578498285,-3216.41753881339,100,0,0
+France>Germany,France,Germany,4800.00000050931,-4800.00000049573,100,0,0
+France>Ireland,France,Ireland,700,-700,100,0,0
+France>Italy,France,Italy,4760.55555639165,-3348.00000028727,100,0,0
+France>Spain,France,Spain,4999.99999998213,-5000.00000053414,100,0,0
+France>Switzerland,France,Switzerland,4500.00003484542,-3700.0000324478,100,0,0
+France>United Kingdom,France,United Kingdom,5600.00000002776,-5600.00000043227,100,0,0
+Germany>Norway,Germany,Norway,1399.99999980131,-1400.00000036396,100,0,0
+Germany>Sweden,Germany,Sweden,1314.99999725938,-1314.99999735378,100,0,0
+Germany>Switzerland,Germany,Switzerland,4200.00000423697,-4200.00000394578,100,0,0
+Germany>United Kingdom,Germany,United Kingdom,1400,-1400,100,0,0
+Ireland>United Kingdom,Ireland,United Kingdom,1750.00000100172,-1750.00000082613,100,0,0
+Italy>Switzerland,Italy,Switzerland,3750.0000686367,-3750.00007594689,100,0,0
+Norway>Sweden,Norway,Sweden,3695.00000110931,-3695.00000112807,100,0,0
+Norway>United Kingdom,Norway,United Kingdom,2799.99999809429,-2799.99999805329,100,0,0
+Portugal>Spain,Portugal,Spain,3500.00000082969,-4200.0000006413,100,0,0
+France>Benelux,France,Benelux,4710.40000840782,-3207.36001350224,100,0,0
+Germany>Eastern Europe,Germany,Eastern Europe,11150.0000062938,-11150.0000059221,100,0,0
+Germany>Benelux,Germany,Benelux,9300.00000972349,-9300.00000959693,100,0,0
+Italy>Eastern Europe,Italy,Eastern Europe,1007.60000326866,-1014.00000279195,100,0,0
+Italy>Balkans,Italy,Balkans,1860.72000082773,-1910.80000018398,100,0,0
+Switzerland>Eastern Europe,Switzerland,Eastern Europe,1200.00000236738,-1200.0000022043,100,0,0
+Eastern Europe>Balkans,Eastern Europe,Balkans,6475.08001892277,-6193.08001432761,100,0,0
+Eastern Europe>Baltics,Eastern Europe,Baltics,1500.00000254394,-1000.00000308206,100,0,0
+Eastern Europe>Sweden,Eastern Europe,Sweden,600.000000038859,-600.000000435846,100,0,0
+Benelux>United Kingdom,Benelux,United Kingdom,2072.0000639553,-2080.00006838529,100,0,0
+Benelux>Denmark,Benelux,Denmark,700.000002214676,-700.000002277932,100,0,0
+Benelux>Norway,Benelux,Norway,700.000005628819,-700.000006372862,100,0,0
+Baltics>Sweden,Baltics,Sweden,700.000005326312,-700.000006030188,100,0,0
+Baltics>Finland,Baltics,Finland,1168.15606005358,-1185.06228843785,100,0,0

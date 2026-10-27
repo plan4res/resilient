@@ -1,0 +1,81 @@
+Type,Zone,value,Profile_Timeserie
+Total,Balkans,263992083.33333328,AggregatedTimeSerie_Total_Balkans.csv
+ElecHeating,Balkans,46026305.55555553,
+ElecVehicle,Balkans,9457555.5555555,
+Total,Baltics,33725833.333333336,AggregatedTimeSerie_Total_Baltics.csv
+ElecHeating,Baltics,5636555.555555556,
+ElecVehicle,Baltics,2929916.666666639,
+Total,Benelux,202063527.7777778,AggregatedTimeSerie_Total_Benelux.csv
+ElecHeating,Benelux,19616416.66666667,
+ElecVehicle,Benelux,9027472.222222194,
+Total,Denmark,38799611.11111112,P_CMIP6_SP370_EDM_ADM0_DK_2030.csv
+ElecHeating,Denmark,6715555.555555556,
+ElecVehicle,Denmark,2329555.555555556,
+Total,Eastern Europe,406829888.88888884,AggregatedTimeSerie_Total_Eastern Europe.csv
+ElecHeating,Eastern Europe,59208611.11111106,
+ElecVehicle,Eastern Europe,18072999.999999974,
+Total,Finland,74731305.55555557,P_CMIP6_SP370_EDM_ADM0_FI_2030.csv
+ElecHeating,Finland,17825638.88888889,
+ElecVehicle,Finland,2330916.666666639,
+Total,France,494791944.4444444,P_CMIP6_SP370_EDM_ADM0_FR_2030.csv
+ElecHeating,France,77354083.33333334,
+ElecVehicle,France,22114138.888888862,
+Total,Germany,532584277.7777778,P_CMIP6_SP370_EDM_ADM0_DE_2030.csv
+ElecHeating,Germany,60997666.66666664,
+ElecVehicle,Germany,32099833.333333306,
+Total,Ireland,27245472.222222224,P_CMIP6_SP370_EDM_ADM0_IE_2030.csv
+ElecHeating,Ireland,3293111.111111111,
+ElecVehicle,Ireland,1486361.111111111,
+Total,Italy,302777972.22222227,P_CMIP6_SP370_EDM_ADM0_IT_2030.csv
+ElecHeating,Italy,54731361.11111112,
+ElecVehicle,Italy,17598361.111111112,
+Total,Norway,126862666.66666667,P_CMIP6_SP370_EDM_ADM0_NO_2030.csv
+ElecHeating,Norway,26366722.222222224,
+ElecVehicle,Norway,2633722.222222222,
+Total,Portugal,50101916.66666667,P_CMIP6_SP370_EDM_ADM0_PT_2030.csv
+ElecHeating,Portugal,8105166.666666667,
+ElecVehicle,Portugal,2430805.555555556,
+Total,Spain,277169444.4444445,P_CMIP6_SP370_EDM_ADM0_ES_2030.csv
+ElecHeating,Spain,20361611.111111112,
+ElecVehicle,Spain,8335111.111111111,
+Total,Sweden,131195361.11111112,P_CMIP6_SP370_EDM_ADM0_SE_2030.csv
+ElecHeating,Sweden,20499166.666666668,
+ElecVehicle,Sweden,5410388.888888889,
+Total,Switzerland,70216500.0,P_CMIP6_SP370_EDM_ADM0_CH_2030.csv
+ElecHeating,Switzerland,8346333.333333333,
+ElecVehicle,Switzerland,3025333.3333333335,
+Total,United Kingdom,314462027.7777778,P_CMIP6_SP370_EDM_ADM0_GB_2030.csv
+ElecHeating,United Kingdom,46906472.222222224,
+ElecVehicle,United Kingdom,6399555.555555556,
+MaxActivePowerDemand,France,1500000.0,
+CostActivePowerDemand,France,20000.0,
+MaxActivePowerDemand,Germany,1500000.0,
+CostActivePowerDemand,Germany,20000.0,
+MaxActivePowerDemand,Italy,1500000.0,
+CostActivePowerDemand,Italy,20000.0,
+MaxActivePowerDemand,Switzerland,1500000.0,
+CostActivePowerDemand,Switzerland,20000.0,
+MaxActivePowerDemand,Eastern Europe,1500000.0,
+CostActivePowerDemand,Eastern Europe,20000.0,
+MaxActivePowerDemand,Benelux,1500000.0,
+CostActivePowerDemand,Benelux,20000.0,
+MaxActivePowerDemand,Spain,1500000.0,
+CostActivePowerDemand,Spain,20000.0,
+MaxActivePowerDemand,Portugal,1500000.0,
+CostActivePowerDemand,Portugal,20000.0,
+MaxActivePowerDemand,Ireland,1500000.0,
+CostActivePowerDemand,Ireland,20000.0,
+MaxActivePowerDemand,United Kingdom,1500000.0,
+CostActivePowerDemand,United Kingdom,20000.0,
+MaxActivePowerDemand,Balkans,1500000.0,
+CostActivePowerDemand,Balkans,20000.0,
+MaxActivePowerDemand,Baltics,1500000.0,
+CostActivePowerDemand,Baltics,20000.0,
+MaxActivePowerDemand,Sweden,1500000.0,
+CostActivePowerDemand,Sweden,20000.0,
+MaxActivePowerDemand,Finland,1500000.0,
+CostActivePowerDemand,Finland,20000.0,
+MaxActivePowerDemand,Denmark,1500000.0,
+CostActivePowerDemand,Denmark,20000.0,
+MaxActivePowerDemand,Norway,1500000.0,
+CostActivePowerDemand,Norway,20000.0,

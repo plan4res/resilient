@@ -1,0 +1,46 @@
+BlockSolverConfig # The name of the configuration
+
+1 # The BlockSolverConfig is "differential"
+1 # The number of Solvers
+
+# Now all the names of the Solvers
+CPXMILPSolver
+#SCIPMILPSolver
+#GRBMILPSolver
+#HiGHSMILPSolver
+
+1 # The number of ComputeConfigs
+
+# Now all the ComputeConfigs
+# 1st --------------------------------------
+ComputeConfig # Type of the object
+1 # differential
+
+7 # Number of integer parameters
+intLogVerb 100
+intRelaxIntVars 1 # 1 if integer constraints are relaxes, else 0
+intConsModification 0
+CPXPARAM_Threads  1
+CPXPARAM_LPMethod 1
+CPXPARAM_Preprocessing_Presolve 1
+CPXPARAM_Emphasis_Numerical 1
+#CPXPARAM_Emphasis_Memory CPX_OFF (default)
+#CPXPARAM_LPMethod 0 CPX_ALG_AUTOMATIC (default) 1 CPX_ALG_PRIMAL 2 CPX_ALG_DUAL 
+#
+3 # Number of double parameters
+dblAAccSol 5e-04
+dblMaxTime 3600
+CPXPARAM_Simplex_Tolerances_Feasibility 1e-06
+#CPXPARAM_WorkMem 2
+
+0 # Number of string parameters
+#strOutputFile uc.lp
+
+0 # number of vector-of-int parameters
+
+0 # number of vector-of-double parameters
+0 # number of vector-of-string parameters
+
+# Pointer to the "extra" Configuration
+# [none]
+# 1st END ----------------------------------

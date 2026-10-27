@@ -1,0 +1,470 @@
+outputDir: "output/envis_power_uc_stoch/"
+inputDir: "Data/envis13_stoch/"
+timeseriespath: Data/TimeSeries
+
+# dates information:
+# dayfirst: True if the format is giving the day first (01/07/2050 means first of july)
+# BeginTimeSeries : first day of the datasets  
+# EndTimeSeries : last day of the datasets 
+# BeginDataset : first day of the instance to create
+# EndDataset: last day of the instance to create
+Calendar:
+    dayfirst: True # do not change
+    BeginTimeSeries: '01/01/2050  00:00:00'   # timescale where timeseries are available - do not change
+    EndTimeSeries: '31/12/2050  23:00:00'   # timescale where timeseries are available - do not change
+    BeginDataset: '02/07/2030  00:00:00'  # can be any date in 2030  - format dd/mm/yyyy HH:MM:SS 
+    EndDataset: '02/07/2030  23:00:00'  # can be any date after BeginDataset - format dd/mm/yyyy HH:MM:SS 
+    #EndDataset: '31/12/2031  23:00:00'
+    TimeStep:  # duration of timesteps 
+        Unit: hours   # can be hours, days, weeks
+        Duration: 1   # duration of timestep expressed in the unit above
+
+aggregateregions: # how to aggregate regions 
+    #'Iberia': ['Spain','Portugal']
+    'Benelux': ['Belgium', 'Luxembourg' , 'The Netherlands']
+    'Baltics': ['Estonia', 'Latvia', 'Lithuania']
+    'Balkans': ['Non-EU-Balkans', 'Bulgaria', 'Croatia','Greece','Romania','Slovenia','North Macedonia'] 
+    'Eastern Europe': ['Austria' ,  'Czech Republic', 'Hungary' , 'Poland' , 'Slovakia' ]
+
+private_map: 'europe.geojson'   # used to compute coordinates of buses
+
+CouplingConstraints: 
+    # Coupling constraints which are not listed here will not be created in dataset
+    # Coupling contraints can be : Demand, Primary, Secondary, Inertia, CO2
+    # For the case of CO2, MaxPower and Cost are not needed, Budget can be defined (tons/CO2)
+    # Partition defines the level at which the coupling constraint applies
+    ActivePowerDemand : # mandatory demand constraint
+        Partition: 'Countries'
+        SumOf: ['Total']
+    # PrimaryDemand : # optional primary reserve constraint
+        # Partition: 'Countries'
+        # SumOf: ['Primary']
+    # SecondaryDemand : # optional primary reserve constraint
+        # Partition: 'Countries'
+        # SumOf: ['Secondary']
+    # InertiaDemand : # optional inertia constraint
+        # Partition: 'Continent'
+        # SumOf: ['Inertia']
+    # PollutantBudget:
+        # CO2: # optional emissions constraints (in further versions there can be multiple gases)
+            # Partition: 'Continent'
+            # SumOf: ['CO2']
+
+# list of scenarios from those available in the dataset (=names of columns of timeseries)
+Scenarios: ['2020_0','2021_0','2022_0','2023_0','2024_0','2025_0','2026_0','2027_0','2028_0','2029_0','2030_0','2031_0','2032_0','2033_0','2034_0','2035_0','2036_0','2037_0','2038_0','2039_0','2040_0','2020_1','2021_1','2022_1','2023_1','2024_1','2025_1','2026_1','2027_1','2028_1','2029_1','2030_1','2031_1','2032_1','2033_1','2034_1','2035_1','2036_1','2037_1','2038_1','2039_1','2040_1','2020_2','2021_2','2022_2','2023_2','2024_2','2025_2','2026_2','2027_2','2028_2','2029_2','2030_2','2031_2','2032_2','2033_2','2034_2','2035_2','2036_2','2037_2','2038_2','2039_2','2040_2','2020_3','2021_3','2022_3','2023_3','2024_3','2025_3','2026_3','2027_3','2028_3','2029_3','2030_3','2031_3','2032_3','2033_3','2034_3','2035_3','2036_3','2037_3','2038_3','2039_3','2040_3','2020_4','2021_4','2022_4','2023_4','2024_4','2025_4','2026_4','2027_4','2028_4','2029_4','2030_4','2031_4','2032_4','2033_4','2034_4','2035_4','2036_4','2037_4','2038_4','2039_4','2040_4']
+
+# parameters
+Parameters: 
+    committable: False  # to include integer contraints to thermal plants or not
+    extendable: True  # to allow capacity expansion or not
+    NumberHoursInYear: 8760  # do not change = number of hours in the year
+    ScenarisedData:  # do not change = used to compute scenarised data out of timeseries in the dataset
+        'ActivePowerDemand': 
+            MultiplyTimeSerieBy: 'Energy'
+        'Hydro:Inflows': 
+            MultiplyTimeSerieBy: 
+                reservoir: 'Energy'
+        'Renewable:MaxPowerProfile':
+            MultiplyTimeSerieBy: 
+                solar: 'Power'
+                wind: 'Power'
+                hydro: 'Energy'     
+    zerocapacity: 1.0  # capacity in MW under which it is considered to be 0
+    InitialFillingrate:  # initial filling rates of reservoirs per countries  (valid for a start begin july)
+        Austria : 0.37
+        Bulgaria : 0.37
+        Croatia : 0.37
+        Czech Republic : 0.37
+        France : 0.40
+        Germany : 0.40
+        Greece : 0.37
+        Hungary : 0.37
+        Italy : 0.41
+        Ireland : 0.41 
+        Non-EU-Balkans : 0.37
+        Norway : 0.53
+        Poland : 0.37
+        Portugal : 0.46
+        Romania : 0.37
+        Slovakia : 0.37
+        Slovenia : 0.37
+        Spain : 0.5
+        Sweden : 0.53
+        Switzerland : 0.4                     
+        Turkey: 0.4  
+    
+# data can be given as an excel file plus additional csv time series, or as a set of csv files
+inputformat: csv # excel or csv
+
+csvfiles: # list of csv files to create in the plan4res excel file (comment line if not treated)
+    ZP_ZonePartition: 'ZP_ZonePartition.csv'  # mandatory, contains description of regions
+    IN_Interconnections: 'IN_Interconnections.csv'  # optionnal, contains description of network
+    ZV_ZoneValues: 'ZV_ZoneValues.csv' # mandatory, contains description of coupling constraints
+    TU_ThermalUnits: 'TU_ThermalUnits.csv' # optionnal, contains description of thermal units
+    SS_SeasonalStorage: 'SS_SeasonalStorage.csv' # optionnal, containsescription of seasonal storages
+    STS_ShortTermStorage: 'STS_ShortTermStorage.csv' # optionnal, contains description of short term storages
+    RES_RenewableUnits: 'RES_RenewableUnits.csv' # optionnal, contains description of renewable units
+
+Technos: # list of technologies and link to modelling in plan4res
+# thermal= modelled as ThermalUnit (TU), reservoir= modelled as HydroUnit (SS), 
+# hydrostorage/battery=modelled as ShortTermStorage (STS), res/runofriver=modelled as IntermittentUnit (RES)
+    TU: 
+        'Combined Heat and Power|Biomass|w/ CCS':
+            carrier: biomass
+            component: generator
+            MinOnDuration: 3  # hours
+            MinOffDuration: 3  # hours
+            MaxPower: 100  # MW
+            MinPower: 50  # MW
+            RampRate: 6   # percentage
+            StartUpCost: 5500
+        'Combined Heat and Power|Biomass|w/o CCS': 
+            carrier: biomass
+            component: generator
+            MinOnDuration: 3
+            MinOffDuration: 3
+            MaxPower: 100
+            MinPower: 50
+            RampRate: 6
+            StartUpCost: 5000
+        'Combined Heat and Power|Coal|Hard coal|w/ CCS': 
+            carrier: coal
+            component: generator
+            MinOnDuration: 6
+            MinOffDuration: 6
+            MaxPower: 200
+            MinPower: 100
+            RampRate: 5
+            StartUpCost: 300000
+        'Combined Heat and Power|Coal|Hard coal|w/o CCS': 
+            carrier: coal
+            component: generator
+            MinOnDuration: 6
+            MinOffDuration: 6
+            MaxPower: 200
+            MinPower: 100
+            RampRate: 5
+            StartUpCost: 250000
+        'Combined Heat and Power|Coal|Lignite|w/ CCS': 
+            carrier: coal
+            component: generator
+            MinOnDuration: 6
+            MinOffDuration: 6
+            MaxPower: 200
+            MinPower: 100
+            RampRate: 5
+            StartUpCost: 280000
+        'Combined Heat and Power|Coal|Lignite|w/o CCS': 
+            carrier: coal
+            component: generator
+            MinOnDuration: 6
+            MinOffDuration: 6
+            MaxPower: 200
+            MinPower: 100
+            RampRate: 5
+            StartUpCost: 240000
+        'Combined Heat and Power|Gas|Biomethane|CCGT|w/o CCS': 
+            carrier: gas
+            component: generator
+            MinOnDuration: 3
+            MinOffDuration: 3
+            MaxPower: 250
+            MinPower: 170
+            RampRate: 10
+            StartUpCost: 85000
+        'Combined Heat and Power|Gas|Fossil|CCGT|w/ CCS': 
+            carrier: gas
+            component: generator
+            MinOnDuration: 3
+            MinOffDuration: 3
+            MaxPower: 250
+            MinPower: 170
+            RampRate: 10
+            StartUpCost: 95000
+        'Combined Heat and Power|Gas|Fossil|CCGT|w/o CCS': 
+            carrier: gas
+            component: generator
+            MinOnDuration: 3
+            MinOffDuration: 3
+            MaxPower: 250
+            MinPower: 170
+            RampRate: 10
+            StartUpCost: 85000
+        'Combined Heat and Power|Gas|Synthetic Methane|CCGT|w/o CCS': 
+            carrier: gas
+            component: generator
+            MinOnDuration: 3
+            MinOffDuration: 3
+            MaxPower: 250
+            MinPower: 170
+            RampRate: 10
+            StartUpCost: 85000
+        'Combined Heat and Power|Hydrogen|Fuel Cell': 
+            carrier: hydrogen
+            component: generator
+            MinOnDuration: 1
+            MinOffDuration: 1
+            MaxPower: 50
+            RampRate: 30
+        'Combined Heat and Power|Oil|w/o CCS': 
+            carrier: oil
+            component: generator
+            MinOnDuration: 1
+            MinOffDuration: 1
+            MaxPower: 100
+            MinPower: 50
+            RampRate: 20
+            StartUpCost: 45000
+        'Combined Heat and Power|Waste': 
+            carrier: biomass
+            component: generator
+            MinOnDuration: 4
+            MinOffDuration: 4
+            MaxPower: 50
+            MaxPower: 30
+            RampRate: 30
+            StartUpCost: 10000
+        'Electricity|Biomass|w/o CCS': 
+            carrier: biomass
+            component: generator
+            MinOnDuration: 3
+            MinOffDuration: 3
+            MaxPower: 250
+            MinPower: 150
+            RampRate: 6
+            StartUpCost: 6000
+        'Electricity|Biomass|w/ CCS': 
+            carrier: biomass
+            component: generator
+            MinOnDuration: 3
+            MinOffDuration: 3
+            MaxPower: 250
+            MinPower: 150
+            RampRate: 6
+            StartUpCost: 6000
+        'Electricity|Coal|Hard coal|w/o CCS': 
+            carrier: coal
+            component: generator
+            MinOnDuration: 6
+            MinOffDuration: 6
+            MaxPower: 800
+            MinPower: 320
+            RampRate: 5
+            StartUpCost: 1000000
+        'Electricity|Coal|Hard coal|w/ CCS': 
+            carrier: coal
+            component: generator
+            MinOnDuration: 6
+            MinOffDuration: 6
+            MaxPower: 800
+            MinPower: 320
+            RampRate: 5
+            StartUpCost: 1200000
+        'Electricity|Coal|Lignite|w/o CCS': 
+            carrier: coal
+            component: generator
+            MinOnDuration: 24
+            MinOffDuration: 24
+            MaxPower: 800
+            MinPower: 320
+            RampRate: 5
+            StartUpCost: 1000000
+        'Electricity|Coal|Lignite|w/ CCS': 
+            carrier: coal
+            component: generator
+            MinOnDuration: 24
+            MinOffDuration: 24
+            MaxPower: 800
+            MinPower: 320
+            RampRate: 5
+            StartUpCost: 1200000
+        'Electricity|Gas|Biomethane|CCGT|w/o CCS': 
+            carrier: gas
+            component: generator
+            MinOnDuration: 3
+            MinOffDuration: 3
+            MaxPower: 500
+            MinPower: 150
+            RampRate: 10
+            StartUpCost: 90000
+        'Electricity|Gas|Biomethane|Gas Engines': 
+            carrier: gas
+            component: generator
+            MinOnDuration: 3
+            MinOffDuration: 3
+            MaxPower: 500
+            MinPower: 150
+            RampRate: 10
+        'Electricity|Gas|Biomethane|OCGT|w/o CCS': 
+            carrier: gas
+            component: generator
+            MinOnDuration: 3
+            MinOffDuration: 3
+            MaxPower: 500
+            MinPower: 150
+            RampRate: 10
+            StartUpCost: 90000
+        'Electricity|Gas|Fossil|CCGT|w/o CCS': 
+            carrier: gas
+            component: generator
+            MinOnDuration: 3
+            MinOffDuration: 3
+            MaxPower: 500
+            MinPower: 150
+            RampRate: 10
+            StartUpCost: 90000
+        'Electricity|Gas|Fossil|CCGT|w/ CCS': 
+            carrier: gas
+            component: generator
+            MinOnDuration: 24
+            MinOffDuration: 24
+            MaxPower: 500
+            MinPower: 150
+            RampRate: 10
+            StartUpCost: 100000
+        'Electricity|Gas|Fossil|Gas Engines': 
+            carrier: gas
+            component: generator
+            MinOnDuration: 3
+            MinOffDuration: 3
+        'Electricity|Gas|Fossil|OCGT|w/o CCS': 
+            carrier: gas
+            component: generator
+            MinOnDuration: 3
+            MinOffDuration: 3
+            MaxPower: 500
+            MinPower: 150
+            RampRate: 10
+            StartUpCost: 90000
+        'Electricity|Gas|Synthetic methane|CCGT|w/o CCS': 
+            carrier: gas
+            component: generator
+            MinOnDuration: 3
+            MinOffDuration: 3
+            MaxPower: 500
+            MinPower: 150
+            RampRate: 10
+            StartUpCost: 90000
+        'Electricity|Gas|Synthetic methane|Gas Engines': 
+            carrier: gas
+            component: generator
+            MinOnDuration: 3
+            MinOffDuration: 3
+            MaxPower: 500
+            MinPower: 150
+            RampRate: 10
+        'Electricity|Gas|Synthetic methane|OCGT|w/o CCS': 
+            carrier: gas
+            component: generator
+            MinOnDuration: 3
+            MinOffDuration: 3
+            MaxPower: 500
+            MinPower: 150
+            RampRate: 10
+            StartUpCost: 90000
+        'Electricity|Geothermal': 
+            carrier: geothermal
+            component: generator
+        'Electricity|Hydrogen|OCGT': 
+            carrier: hydrogen
+            component: generator
+            MinOnDuration: 1
+            MinOffDuration: 1
+            MaxPower: 250
+            RampRate: 30
+        'Electricity|Nuclear': 
+            carrier: nuclear
+            component: generator
+            MinOnDuration: 168
+            MinOffDuration: 168
+            MaxPower: 1000
+            MinPower: 500
+            RampRate: 5
+            StartUpCost: 400000
+        'Electricity|Ocean': 
+            carrier: ocean
+            component: generator
+        'Electricity|Oil|w/o CCS': 
+            carrier: oil
+            component: generator
+            MinOnDuration: 1
+            MinOffDuration: 1
+            MaxPower: 100
+            MinPower: 50
+            RampRate: 20 
+            StartUpCost: 45000    
+        'Electricity|Gas|Peak': 
+            carrier: gas
+            component: generator
+            MinOnDuration: 3
+            MinOffDuration: 3
+            MaxPower: 500
+            MinPower: 150
+            RampRate: 10
+            StartUpCost: 90000
+    SS: 
+        'Hydro|Reservoir': 
+            carrier: hydro
+            component: Store
+    STS: 
+        'Hydro|Pumped Storage': 
+            carrier: hydro
+            component: StorageUnit
+        'Battery|Lithium-Ion':
+            carrier: battery
+            component: StorageUnit
+        'Battery|Peak':
+            carrier: battery
+            component: StorageUnit
+    RES: 
+        'Solar|CSP':
+            carrier: solar
+        'Solar|PV|Rooftop':
+            carrier: solar
+        'Solar|PV|Utility':
+            carrier: solar
+        'Wind|Offshore':
+            carrier: wind
+        'Wind|Onshore':
+            carrier: wind
+        'Hydro|Run of River':
+            carrier: hydro
+
+# list of carriers and colors to be associated to them
+Carriers:
+    AC:
+        color: black
+    NTC:
+        color: black
+    electricity:
+        color: black
+    wind:
+        color: green
+    solar:
+        color: gold
+    nuclear:
+        color: orange
+    oil:
+        color: peru
+    gas:
+        color: darkorange
+    hydrogen:
+        color: turquoide
+    coal:
+        color: darkslategrey
+    biomass:
+        color: olive
+    geothermal:
+        color: firebrick
+    hydro:
+        color: royalblue
+    ocean:
+        color: navy
+    battery:
+        color: pink
+    slack:
+        color: white
+    
+
+
+
